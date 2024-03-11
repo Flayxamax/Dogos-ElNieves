@@ -1,0 +1,12 @@
+com\itson\dogos_model\Main.class
+com\itson\dogos_model\Proveedor.class
+com\itson\dogos_model\CompraInsumo.class
+com\itson\dogos_model\Venta.class
+com\itson\dogos_model\InsumoProveedor.class
+com\itson\dogos_model\Usuario.class
+com\itson\dogos_model\Insumo.class
+com\itson\dogos_model\Compra.class
+com\itson\dogos_model\TipoUsuario.class
+com\itson\dogos_model\Orden.class
+com\itson\dogos_model\InsumoProducto.class
+com\itson\dogos_model\Producto.class
