@@ -6,12 +6,16 @@ package com.itson.dogos_controller;
 
 import com.itson.dogos_controller.exceptions.NonexistentEntityException;
 import com.itson.dogos_model.Insumo;
+import com.itson.dogos_model.InsumoProducto;
+import com.itson.dogos_model.Producto;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -133,5 +137,27 @@ public class InsumoJpaController implements Serializable {
             em.close();
         }
     }
-    
+
+    public List<Insumo> getInsumoProducto(Producto producto) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<InsumoProducto> query = em.createQuery(
+                    "select i from InsumoProducto i "
+                    + "where i.producto = :producto",
+                    InsumoProducto.class);
+            query.setParameter("producto", producto);
+            List<InsumoProducto> insumosProductos = query.getResultList();
+            List<Insumo> listaInsumos = new ArrayList<>();
+
+            for (InsumoProducto i : insumosProductos) {
+                listaInsumos.add(i.getInsumo());
+            }
+
+            return listaInsumos;
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return null;
+    }
+
 }
