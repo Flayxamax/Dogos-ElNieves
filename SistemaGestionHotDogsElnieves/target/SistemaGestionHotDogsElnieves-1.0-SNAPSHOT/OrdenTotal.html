@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Total</title>
+        <link href="assets/css/OrdenTotal.css" rel="stylesheet" type="text/css"/>
+        <script src="assets/css/OrdenTotal.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1>Total</h1>
+        </header>
+
+        <button onclick="regresarAOrdenes()">Regresar a Ordenes</button>
+
+        <div class="container">
+            <section class="resumen-orden">
+                <h2>Resumen de Orden</h2>
+                <div class="productos-orden">
+
+                    <div class="producto-resumen">
+                        <span class="nombre"></span>
+                    </div>
+
+
+                </div>
+                <div class="total">
+                    Total: 100.00 
+                </div>
+                <button>Pago con tarjeta</button>
+            </section>
+
+            <section class="pago">
+                <h2>Pago</h2>
+                <div class="pago-info">
+                    <label for="monto">Monto Pagado:</label>
+                    <input type="number" id="monto" onchange="calcularCambio()">
+                </div>
+                <div class="cambio">
+                    Cambio: <span id="cambio">0.00</span>
+                </div>
+                <button class="finalizarOrden">Finalizar Orden</button>
+            </section>
+        </div>
+    </body>
+</html>

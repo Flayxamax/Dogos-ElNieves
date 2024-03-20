@@ -1,0 +1,82 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.resumen-orden,
+.pago {
+    width: 45%;
+}
+
+.resumen-orden {
+    border-right: 1px solid #ccc;
+    padding-right: 20px;
+    margin-right: 20px;
+}
+
+.resumen-orden h2,
+.pago h2 {
+    margin-bottom: 10px;
+}
+
+.productos-orden {
+    margin-bottom: 20px;
+    max-height: 290px;
+    overflow-y: auto;
+}
+
+.producto-resumen {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.pago-info,
+.cambio {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    size: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin-top: 5%;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.quitar {
+    background-color: #f00;
+    color: #fff; 
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-right: 2%;
+}
+
+input[type="number"] {
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="number"]:focus {
+    outline: none;
+}
