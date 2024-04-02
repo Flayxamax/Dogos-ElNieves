@@ -7,6 +7,8 @@ package com.itson.dogos_model;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,11 +33,12 @@ public class Venta implements Serializable {
     @Column(name = "precio", nullable = false)
     private double precio;
 
-    @Column(name = "cantidadProducto", nullable = false)
-    private int cantidadProducto;
-
     @Column(name = "importe", nullable = false)
     private double importe;
+
+    @Column(name = "tipoPago", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TipoPago tipoPago;
 
     @ManyToOne
     @JoinColumn(name = "id_orden")
@@ -72,14 +75,6 @@ public class Venta implements Serializable {
         this.precio = precio;
     }
 
-    public int getCantidadProducto() {
-        return cantidadProducto;
-    }
-
-    public void setCantidadProducto(int cantidadProducto) {
-        this.cantidadProducto = cantidadProducto;
-    }
-
     public double getImporte() {
         return importe;
     }
@@ -96,6 +91,14 @@ public class Venta implements Serializable {
         this.id = id;
     }
 
+    public TipoPago getTipoPago() {
+        return tipoPago;
+    }
+
+    public void setTipoPago(TipoPago tipoPago) {
+        this.tipoPago = tipoPago;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -105,7 +108,6 @@ public class Venta implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Venta)) {
             return false;
         }

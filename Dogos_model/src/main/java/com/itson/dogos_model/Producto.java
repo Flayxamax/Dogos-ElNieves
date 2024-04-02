@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,6 +34,10 @@ public class Producto implements Serializable {
 
     @Column(name = "precio", nullable = false)
     private double precio;
+
+    @Column(name = "categoria", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private CategoriaProducto categoria;
 
     public Producto() {
     }
@@ -67,9 +73,16 @@ public class Producto implements Serializable {
         return hash;
     }
 
+    public CategoriaProducto getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(CategoriaProducto categoria) {
+        this.categoria = categoria;
+    }
+
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Producto)) {
             return false;
         }
