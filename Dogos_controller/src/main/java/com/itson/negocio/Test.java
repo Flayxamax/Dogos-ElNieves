@@ -5,17 +5,21 @@
 package com.itson.negocio;
 
 import com.itson.dogos_controller.InsumoJpaController;
+import com.itson.dogos_controller.InsumoProductoJpaController;
 import com.itson.dogos_controller.InsumoProveedorJpaController;
 import com.itson.dogos_controller.OrdenJpaController;
 import com.itson.dogos_controller.ProductoJpaController;
 import com.itson.dogos_controller.ProveedorJpaController;
 import com.itson.dogos_controller.UsuarioJpaController;
 import com.itson.dogos_controller.VentaJpaController;
+import com.itson.dogos_model.CategoriaProducto;
 import com.itson.dogos_model.Insumo;
+import com.itson.dogos_model.InsumoProducto;
 import com.itson.dogos_model.InsumoProveedor;
 import com.itson.dogos_model.Orden;
 import com.itson.dogos_model.Producto;
 import com.itson.dogos_model.Proveedor;
+import com.itson.dogos_model.TipoPago;
 import com.itson.dogos_model.TipoUsuario;
 import com.itson.dogos_model.Usuario;
 import com.itson.dogos_model.Venta;
@@ -30,7 +34,7 @@ import javax.persistence.Persistence;
  *
  * @author ildex
  */
-public class sexo {
+public class Test {
 
     /**
      * @param args the command line arguments
@@ -87,10 +91,22 @@ public class sexo {
         Producto producto = new Producto();
         producto.setNombre("Sencillo");
         producto.setPrecio(30);
-
+        producto.setCategoria(CategoriaProducto.dogo);
         ProductoJpaController pjcc = new ProductoJpaController(emf);
 //        pjcc.create(producto);
-
+        
+        InsumoProducto insumoProducto1 = new InsumoProducto();
+        insumoProducto1.setInsumo(insumo);
+        insumoProducto1.setProducto(producto);
+        InsumoProducto insumoProducto2 = new InsumoProducto();
+        insumoProducto2.setInsumo(insumo2);
+        insumoProducto2.setProducto(producto);
+        
+        InsumoProductoJpaController ipj = new InsumoProductoJpaController(emf);
+        
+//        ipj.create(insumoProducto1);
+//        ipj.create(insumoProducto2);
+        
         Date fecha = new Date();
 
         Orden orden = new Orden();
@@ -103,7 +119,6 @@ public class sexo {
 //        ojc.create(orden);
 
         Venta venta = new Venta();
-        venta.setCantidadProducto(1);
         venta.setImporte(30);
         venta.setPrecio(30);
         venta.setProducto(producto);
@@ -119,7 +134,7 @@ public class sexo {
         
         usuario.setId((long) 1);
 
-        sexo.realizarVenta(listaProductos2, usuario);
+        sexo.realizarVenta(listaProductos2, TipoPago.efectivo,usuario);
         
         em.close();
         emf.close();

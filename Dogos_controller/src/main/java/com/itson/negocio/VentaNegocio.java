@@ -10,6 +10,7 @@ import com.itson.dogos_controller.VentaJpaController;
 import com.itson.dogos_model.Insumo;
 import com.itson.dogos_model.Orden;
 import com.itson.dogos_model.Producto;
+import com.itson.dogos_model.TipoPago;
 import com.itson.dogos_model.Usuario;
 import com.itson.dogos_model.Venta;
 import java.util.Date;
@@ -30,7 +31,7 @@ public class VentaNegocio {
     OrdenJpaController ojc = new OrdenJpaController(emf);
     VentaJpaController vjc = new VentaJpaController(emf);
 
-    public boolean realizarVenta(List<Producto> listaProductos, Usuario usuario) throws Exception {
+    public boolean realizarVenta(List<Producto> listaProductos,TipoPago tipoPago, Usuario usuario) throws Exception {
         double total = 0;
         boolean validador = true;
 
@@ -65,7 +66,7 @@ public class VentaNegocio {
             venta.setOrden(orden);
             venta.setImporte(total);
             venta.setPrecio(e.getPrecio());
-            venta.setCantidadProducto(1);
+            venta.setTipoPago(tipoPago);
             vjc.create(venta);
             if (venta.getId() == null) {
                 validador = false;
