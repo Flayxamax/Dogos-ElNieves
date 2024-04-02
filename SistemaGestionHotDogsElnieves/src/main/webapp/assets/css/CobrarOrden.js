@@ -92,5 +92,22 @@ document.addEventListener('DOMContentLoaded', function () {
     // Asignar evento al botón de pagar
     const pagarBoton = document.querySelector('.pagar');
     pagarBoton.addEventListener('click', pagarOrden);
+    
+    const navButtons = document.querySelectorAll('.nav-button');
+
+        navButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const categoria = button.dataset.categoria;
+                const productos = document.querySelectorAll('.producto');
+
+                productos.forEach(producto => {
+                    if (categoria === 'todo' || producto.dataset.categoria === categoria) {
+                        producto.style.display = 'block';
+                    } else {
+                        producto.style.display = 'none';
+                    }
+                });
+            });
+        });
 
 });

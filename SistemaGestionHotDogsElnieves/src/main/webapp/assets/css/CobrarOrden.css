@@ -38,12 +38,14 @@ nav {
     padding: 10px;
     margin-bottom: 10px;
     margin-right: 10px;
-    width: 150px;
+    width: fit-content;
+    min-width: 150px;
 }
 
 
 .info {
     margin-bottom: 10px;
+    width: fit-content;
 }
 
 .agregar {
