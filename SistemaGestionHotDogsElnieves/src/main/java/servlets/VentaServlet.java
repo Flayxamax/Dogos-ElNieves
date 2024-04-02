@@ -5,8 +5,12 @@
 package servlets;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.itson.dogos_controller.ProductoJpaController;
 import com.itson.dogos_model.Producto;
+import com.itson.dogos_model.TipoPago;
 import com.itson.dogos_model.Usuario;
 import com.itson.negocio.ProductoNegocio;
 import com.itson.negocio.VentaNegocio;
@@ -96,18 +100,25 @@ public class VentaServlet extends HttpServlet {
             jsonBuilder.append(line);
         }
         Gson gson = new Gson();
-        Producto[] productosArray = gson.fromJson(jsonBuilder.toString(), Producto[].class);
+        JsonObject jsonObject = gson.fromJson(jsonBuilder.toString(), JsonObject.class);
+        JsonArray productosJsonArray = jsonObject.getAsJsonArray("productos");
+
         List<Producto> productos = new ArrayList<>();
-        for (Producto producto : productosArray) {
+        for (JsonElement jsonElement : productosJsonArray) {
+            Producto producto = gson.fromJson(jsonElement, Producto.class);
             productos.add(producto);
             System.out.println(producto.getId());
         }
+
+        // Obtener el tipo de pago del JSON
+        String tipoPagoString = jsonObject.get("tipoPago").getAsString();
+        TipoPago tipoPago = TipoPago.valueOf(tipoPagoString);
 
         VentaNegocio vn = new VentaNegocio();
         Usuario usuario = new Usuario();
         usuario.setId(1l);
         try {
-            vn.realizarVenta(productos, usuario);
+            vn.realizarVenta(productos, tipoPago, usuario);
         } catch (Exception ex) {
             Logger.getLogger(VentaServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

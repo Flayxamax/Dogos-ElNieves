@@ -1,4 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // Función para obtener el tipo de pago seleccionado desde el HTML
+    function obtenerTipoPagoSeleccionado() {
+        const botonPagoEfectivo = document.getElementById('pagoEfectivo');
+        const botonPagoTarjeta = document.getElementById('pagoTarjeta');
+
+        if (botonPagoEfectivo.checked) {
+            return "efectivo";
+        } else if (botonPagoTarjeta.checked) {
+            return "tarjeta";
+        } else {
+            return null;
+        }
+    }
+
     // Función para obtener la orden de la sesión
     function obtenerOrdenDesdeSesion() {
         // Obtener el JSON de la sesión
@@ -21,8 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Calcular el nuevo total y mostrarlo
         let total = 0;
-
-        orden.forEach(function (producto) {
+        productos = orden.productos;
+        productos.forEach(function (producto) {
             total += producto.precio;
             const productoHTML = `
                 <div class="producto-resumen">
@@ -59,20 +73,20 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             body: JSON.stringify(orden)
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al enviar la orden al servidor.');
-            }
-            // Aquí puedes manejar la respuesta del servidor si es necesario
-            return response.json();
-        })
-        .then(data => {
-            // Aquí puedes manejar la respuesta del servidor si es necesario
-            console.log('Orden enviada exitosamente:', data);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al enviar la orden al servidor.');
+                    }
+                    // Aquí puedes manejar la respuesta del servidor si es necesario
+                    return response.json();
+                })
+                .then(data => {
+                    // Aquí puedes manejar la respuesta del servidor si es necesario
+                    console.log('Orden enviada exitosamente:', data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
     }
 
     // Función para finalizar la orden
@@ -81,7 +95,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const montoPagado = parseFloat(montoPagadoInput.value);
         const cambio = montoPagado - total;
         const orden = obtenerOrdenDesdeSesion();
-        
+        const tipoPago = "efectivo";
+
+        // Agregar el tipo de pago al objeto de la orden
+        orden.tipoPago = tipoPago;
+
         // Guardar la orden en el servidor
         enviarOrdenAlServidor(orden);
 
@@ -89,7 +107,30 @@ document.addEventListener('DOMContentLoaded', function () {
         sessionStorage.removeItem('ordenJSON');
 
         // Redirigir o mostrar un mensaje de éxito
-        alert(`Orden finalizada. Cambio: $${cambio.toFixed(2)}`);
+        alert(`Orden finalizada. Tipo de Pago: ${tipoPago}. Cambio: $${cambio.toFixed(2)}`);
+
+        window.location.href = 'Venta';
+    }
+
+    function finalizarOrdenTarjeta(total) {
+        const montoPagadoInput = document.getElementById('monto');
+        const montoPagado = parseFloat(montoPagadoInput.value);
+        const cambio = montoPagado - total;
+        const orden = obtenerOrdenDesdeSesion();
+        const tipoPago = "tarjeta";
+
+        // Agregar el tipo de pago al objeto de la orden
+        orden.tipoPago = tipoPago;
+
+        // Guardar la orden en el servidor
+        enviarOrdenAlServidor(orden);
+
+        // Restaurar la sesión
+        sessionStorage.removeItem('ordenJSON');
+
+        // Redirigir o mostrar un mensaje de éxito
+        alert(`Orden finalizada. Tipo de Pago: ${tipoPago}.`);
+        window.location.href = 'Venta';
     }
 
     // Obtener la orden de la sesión
@@ -105,5 +146,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const finalizarOrdenBoton = document.querySelector('.finalizarOrden');
     finalizarOrdenBoton.addEventListener('click', function () {
         finalizarOrden(total);
+    });
+
+    const finalizarOrdenTBoton = document.querySelector('.finalizarOrdenTarjeta');
+    finalizarOrdenTBoton.addEventListener('click', function () {
+        finalizarOrdenTarjeta(total);
     });
 });

@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Función para agregar un producto a la orden
     function agregarProducto(event) {
+        const idProducto = event.target.parentElement.querySelector('.nombre').getAttribute('value');
         const nombreProducto = event.target.parentElement.querySelector('.nombre').textContent;
         const precioProducto = parseFloat(event.target.parentElement.querySelector('.precio').textContent.replace('$', ''));
-        const idProducto = event.target.parentElement.querySelector('.nombre').getAttribute('value');
 
         // Crear objeto de producto
         const nuevoProducto = {
@@ -77,8 +77,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Función para manejar el evento de pagar
     function pagarOrden() {
-        // Convertir los productos agregados a la orden a formato JSON
-        const ordenJSON = JSON.stringify(ordenProductos);
+        // Crear objeto JSON con productos y tipoPago
+        const ordenJSON = JSON.stringify({
+            productos: ordenProductos
+        });
 
         // Guardar el JSON en la sesión
         sessionStorage.setItem('ordenJSON', ordenJSON);
