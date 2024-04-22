@@ -1,14 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Orden</title>
-        <link rel="stylesheet" href="assets/css/CobrarOrden.css">
-        <script src="assets/css/CobrarOrden.js"></script>
+        <link rel="stylesheet" href="assets/js/CobrarOrden.css">
+        <script src="assets/js/CobrarOrden.js"></script>
     </head>
     <body>
         <header>
@@ -16,21 +16,22 @@
         </header>
 
         <nav>
-            <button class="nav-button" onclick="filtrarProductos('dogos')">Dogos</button>
-            <button class="nav-button" onclick="filtrarProductos('hamburguesas')">Hamburguesas</button>
-            <button class="nav-button" onclick="filtrarProductos('bebidas')">Bebidas</button>
-            <button class="nav-button" onclick="filtrarProductos('extra')">Extras</button>
+            <button class="nav-button" data-categoria="todo">Todo</button>
+            <button class="nav-button" data-categoria="dogo">Dogos</button>
+            <button class="nav-button" data-categoria="hamburguesa">Hamburguesas</button>
+            <button class="nav-button" data-categoria="bebida">Bebidas</button>
+            <button class="nav-button" data-categoria="extra">Extras</button>
         </nav>
 
         <section class="productos">
             <h2>Productos</h2>
-            <div class="scroll-wrapper" id="prodcutos-container">
+            <div class="scroll-wrapper" id="productos-container">
                 <c:forEach var="producto" items="${productos}">
-                    <div class="producto">
+                    <div class="producto" data-categoria="${producto.categoria}">
                         <div class="info">
-                            <span class="nombre" value="${producto.id}">${producto.nombre}</span>
+                            <span class="nombre">${producto.nombre}</span>
                             <div class="detalle">
-                                <span class="precio">${producto.precio}</span>
+                                <span class="precio">$${producto.precio}</span>
                             </div>
                         </div>
                         <button class="agregar">Agregar</button>
@@ -55,7 +56,7 @@
 
             </div>
             <button class="pagar">Pagar</button>
-            <span id="total">$TOTAL</span>
+            <span id="total"></span>
         </section>
     </section>
 </body>
