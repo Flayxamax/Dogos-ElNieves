@@ -4,11 +4,13 @@
  */
 package com.itson.dogos_controller;
 
+import com.itson.dogos_model.CategoriaProducto;
 import com.itson.dogos_model.Insumo;
 import com.itson.dogos_model.InsumoProveedor;
 import com.itson.dogos_model.Orden;
 import com.itson.dogos_model.Producto;
 import com.itson.dogos_model.Proveedor;
+import com.itson.dogos_model.TipoPago;
 import com.itson.dogos_model.TipoUsuario;
 import com.itson.dogos_model.Usuario;
 import com.itson.dogos_model.Venta;
@@ -76,6 +78,7 @@ public class pruebaController {
         Producto producto = new Producto();
         producto.setNombre("Sencillo");
         producto.setPrecio(30);
+        producto.setCategoria(CategoriaProducto.dogo);
 
         ProductoJpaController pjcc = new ProductoJpaController(emf);
         pjcc.create(producto);
@@ -92,11 +95,11 @@ public class pruebaController {
         ojc.create(orden);
 
         Venta venta = new Venta();
-        venta.setCantidadProducto(1);
         venta.setImporte(30);
         venta.setPrecio(30);
         venta.setProducto(producto);
         venta.setOrden(orden);
+        venta.setTipoPago(TipoPago.efectivo);
 
         VentaJpaController vjc = new VentaJpaController(emf);
         vjc.create(venta);

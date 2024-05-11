@@ -50,7 +50,7 @@ public class Test {
         usuario.setNombre("Godge Quezada");
         usuario.setContrasena("qwerty");
         usuario.setTipo(TipoUsuario.NORMAL);
-//        usuarioC.create(usuario);
+        usuarioC.create(usuario);
 
         Proveedor proveedor = new Proveedor();
         proveedor.setNombre("FUD");
@@ -61,8 +61,8 @@ public class Test {
         proveedor2.setTelefono("6441233434");
 
         ProveedorJpaController pjc = new ProveedorJpaController(emf);
-//        pjc.create(proveedor);
-//        pjc.create(proveedor2);
+        pjc.create(proveedor);
+        pjc.create(proveedor2);
 
         Insumo insumo = new Insumo();
         insumo.setNombre("Salchicha");
@@ -73,8 +73,8 @@ public class Test {
         insumo2.setCantidad(100);
 
         InsumoJpaController ijc = new InsumoJpaController(emf);
-//        ijc.create(insumo);
-//        ijc.create(insumo2);
+        ijc.create(insumo);
+        ijc.create(insumo2);
 
         InsumoProveedor insumoP = new InsumoProveedor();
         insumoP.setInsumo(insumo);
@@ -85,15 +85,15 @@ public class Test {
         insumoP2.setProveedor(proveedor2);
 
         InsumoProveedorJpaController ipjc = new InsumoProveedorJpaController(emf);
-//        ipjc.create(insumoP);
-//        ipjc.create(insumoP2);
+        ipjc.create(insumoP);
+        ipjc.create(insumoP2);
 
         Producto producto = new Producto();
         producto.setNombre("Sencillo");
         producto.setPrecio(30);
         producto.setCategoria(CategoriaProducto.dogo);
         ProductoJpaController pjcc = new ProductoJpaController(emf);
-//        pjcc.create(producto);
+        pjcc.create(producto);
         
         InsumoProducto insumoProducto1 = new InsumoProducto();
         insumoProducto1.setInsumo(insumo);
@@ -104,38 +104,9 @@ public class Test {
         
         InsumoProductoJpaController ipj = new InsumoProductoJpaController(emf);
         
-//        ipj.create(insumoProducto1);
-//        ipj.create(insumoProducto2);
-        
-        Date fecha = new Date();
-
-        Orden orden = new Orden();
-        orden.setNumero(1);
-        orden.setTotal(30);
-        orden.setUsuario(usuario);
-        orden.setFechaHora(fecha);
-
-        OrdenJpaController ojc = new OrdenJpaController(emf);
-//        ojc.create(orden);
-
-        Venta venta = new Venta();
-        venta.setImporte(30);
-        venta.setPrecio(30);
-        venta.setProducto(producto);
-        venta.setOrden(orden);
-
-        VentaJpaController vjc = new VentaJpaController(emf);
-//        vjc.create(venta);
-
-        VentaNegocio sexo = new VentaNegocio();
-
-        List<Producto> listaProductos = pjcc.findProductoEntities();
-        List<Producto> listaProductos2 = Arrays.asList(listaProductos.get(0),listaProductos.get(0));
-        
-        usuario.setId((long) 1);
-
-        sexo.realizarVenta(listaProductos2, TipoPago.efectivo,usuario);
-        
+        ipj.create(insumoProducto1);
+        ipj.create(insumoProducto2);
+             
         em.close();
         emf.close();
     }

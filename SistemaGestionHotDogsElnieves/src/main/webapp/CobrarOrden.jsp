@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Orden</title>
-        <link rel="stylesheet" href="assets/js/CobrarOrden.css">
+        <link rel="stylesheet" href="assets/css/CobrarOrden.css">
         <script src="assets/js/CobrarOrden.js"></script>
     </head>
     <body>
@@ -29,7 +29,7 @@
                 <c:forEach var="producto" items="${productos}">
                     <div class="producto" data-categoria="${producto.categoria}">
                         <div class="info">
-                            <span class="nombre">${producto.nombre}</span>
+                            <span class="nombre" value="${producto.id}">${producto.nombre}</span>
                             <div class="detalle">
                                 <span class="precio">$${producto.precio}</span>
                             </div>

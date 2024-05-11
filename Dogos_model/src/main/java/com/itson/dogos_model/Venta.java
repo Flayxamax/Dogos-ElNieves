@@ -5,6 +5,8 @@
 package com.itson.dogos_model;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -15,6 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -35,6 +39,10 @@ public class Venta implements Serializable {
 
     @Column(name = "importe", nullable = false)
     private double importe;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "fecha", columnDefinition = "TIMESTAMP DEFAULT NOW()")
+    private Calendar fecha;
 
     @Column(name = "tipoPago", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -97,6 +105,14 @@ public class Venta implements Serializable {
 
     public void setTipoPago(TipoPago tipoPago) {
         this.tipoPago = tipoPago;
+    }
+
+    public Calendar getFechaHora() {
+        return fecha;
+    }
+
+    public void setFechaHora(Calendar fechaHora) {
+        this.fecha = fechaHora;
     }
 
     @Override

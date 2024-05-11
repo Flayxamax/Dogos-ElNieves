@@ -5,14 +5,19 @@
 package com.itson.dogos_controller;
 
 import com.itson.dogos_controller.exceptions.NonexistentEntityException;
+import com.itson.dogos_model.Orden;
 import com.itson.dogos_model.Venta;
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 /**
@@ -33,6 +38,7 @@ public class VentaJpaController implements Serializable {
     public void create(Venta venta) {
         EntityManager em = null;
         try {
+            venta.setFechaHora(Calendar.getInstance());
             em = getEntityManager();
             em.getTransaction().begin();
             em.persist(venta);
@@ -111,7 +117,21 @@ public class VentaJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public List<Venta> findVentas(Calendar fechaInicio, Calendar fechaFin){
+        EntityManager em = getEntityManager();
+        
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<Venta> criteriaQuery = criteriaBuilder.createQuery(Venta.class);
+        Root<Venta> root = criteriaQuery.from(Venta.class);
 
+        Predicate predicate = criteriaBuilder.between(root.get("fecha"), fechaInicio, fechaFin);
+        criteriaQuery.where(predicate);
+
+        return em.createQuery(criteriaQuery).getResultList();
+        
+    }
+    
     public Venta findVenta(Long id) {
         EntityManager em = getEntityManager();
         try {
