@@ -31,7 +31,7 @@ function cargarCategorias() {
 
 function modificarProducto() {
     var nombreInput = document.querySelector('input[type="text"][name="nombre"]');
-    var precioInput = document.querySelector('input[type="text"][name="precio"]');
+    var precioInput = document.querySelector('input[type="number"][name="precio"]');
     var categoriaSelect = document.getElementById('categoria');
     var idProducto = document.getElementById('idProducto').value;
 
@@ -51,7 +51,7 @@ function modificarProducto() {
 
 function guardarProducto() {
     var nuevoNombre = document.querySelector('input[type="text"][name="nombre"]').value;
-    var nuevoPrecio = document.querySelector('input[type="text"][name="precio"]').value;
+    var nuevoPrecio = document.querySelector('input[type="number"][name="precio"]').value;
     var nuevaCategoria = document.getElementById('categoria').value;
     var idProducto = document.getElementById('idProducto').value;
 
@@ -77,7 +77,7 @@ function guardarProducto() {
         })
         .then(productoModificado => {
             document.querySelector('input[type="text"][name="nombre"]').value = productoModificado.nombre;
-            document.querySelector('input[type="text"][name="precio"]').value = productoModificado.precio;
+            document.querySelector('input[type="number"][name="precio"]').value = productoModificado.precio;
             document.getElementById('categoria').value = productoModificado.categoria;
 
             alert('Producto modificado exitosamente');
@@ -114,7 +114,7 @@ function eliminarProducto() {
 function cancelarEdicion() {
 
     document.querySelector('input[type="text"][name="nombre"]').setAttribute('readonly', true);
-    document.querySelector('input[type="text"][name="precio"]').setAttribute('readonly', true);
+    document.querySelector('input[type="number"][name="precio"]').setAttribute('readonly', true);
     document.getElementById('categoria').setAttribute('disabled', true);
 
     document.getElementById('botonGuardar').style.display = 'none';

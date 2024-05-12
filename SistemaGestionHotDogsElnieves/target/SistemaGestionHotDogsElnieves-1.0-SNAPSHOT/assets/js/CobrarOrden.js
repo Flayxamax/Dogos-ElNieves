@@ -28,9 +28,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Función para quitar un producto de la orden
     function quitarProducto(event) {
-        const index = Array.from(event.target.parentElement.parentElement.children).indexOf(event.target.parentElement);
-        ordenProductos.splice(index, 1);
-        actualizarOrden();
+        let confirmar = confirm("¿Estás seguro de que deseas quitar este producto?");
+        if (confirmar) {
+            const index = Array.from(event.target.parentElement.parentElement.children).indexOf(event.target.parentElement);
+            ordenProductos.splice(index, 1);
+            actualizarOrden();
+        } else {
+            return;
+        }
+
     }
 
     // Función para actualizar la lista de productos en la orden y el total
@@ -77,6 +83,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Función para manejar el evento de pagar
     function pagarOrden() {
+
+        if (ordenProductos.length === 0) {
+            alert("No hay productos en la orden para pagar.");
+            return; 
+        }
         // Crear objeto JSON con productos y tipoPago
         const ordenJSON = JSON.stringify({
             productos: ordenProductos
@@ -92,22 +103,23 @@ document.addEventListener('DOMContentLoaded', function () {
     // Asignar evento al botón de pagar
     const pagarBoton = document.querySelector('.pagar');
     pagarBoton.addEventListener('click', pagarOrden);
-    
+
     const navButtons = document.querySelectorAll('.nav-button');
 
-        navButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const categoria = button.dataset.categoria;
-                const productos = document.querySelectorAll('.producto');
+    navButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const categoria = button.dataset.categoria;
+            const productos = document.querySelectorAll('.producto');
 
-                productos.forEach(producto => {
-                    if (categoria === 'todo' || producto.dataset.categoria === categoria) {
-                        producto.style.display = 'block';
-                    } else {
-                        producto.style.display = 'none';
-                    }
-                });
+            productos.forEach(producto => {
+                if (categoria === 'todo' || producto.dataset.categoria === categoria) {
+                    producto.style.display = 'block';
+                } else {
+                    producto.style.display = 'none';
+                }
             });
         });
+    });
+
 
 });

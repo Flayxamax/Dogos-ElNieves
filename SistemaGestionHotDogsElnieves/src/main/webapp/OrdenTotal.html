@@ -35,7 +35,7 @@
                 <h2>Pago</h2>
                 <div class="pago-info">
                     <label for="monto">Monto Pagado:</label>
-                    <input type="number" id="monto" onchange="calcularCambio()">
+                    <input type="number" id="monto" onchange="calcularCambio()" onkeypress="validarNumero()">
                 </div>
                 <div class="cambio">
                     Cambio: <span id="cambio">0.00</span>

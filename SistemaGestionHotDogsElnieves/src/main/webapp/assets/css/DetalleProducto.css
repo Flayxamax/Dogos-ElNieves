@@ -1,0 +1,81 @@
+/* Estilos base */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #950014;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.infProducto {
+    padding: 20px;
+}
+
+p {
+    display: block;
+    font-weight: bold;
+    padding-bottom: 8px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    padding-bottom: 8px;
+}
+
+input[type="text"] {
+    width: calc(100% - 20px); /* Teniendo en cuenta el padding */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="number"] {
+    width: calc(100% - 20px); /* Teniendo en cuenta el padding */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form {
+    max-width: 80%; /* Limitar el ancho máximo */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    width: 100%; /* Para ocupar el ancho del contenedor */
+    padding: 15px; /* Reducido un poco el padding */
+    background-color: #950014;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 10px; /* Aumentado el espacio entre botones */
+    border-radius: 4px; /* Agregado borde redondeado */
+    transition: background-color 0.3s ease; /* Agregada transición suave */
+}
+
+button:hover {
+    background-color: #7b0011; /* Cambio de color al pasar el mouse */
+}
+
+/* Media query para pantallas más pequeñas */
+@media screen and (max-width: 600px) {
+    .form {
+        max-width: 90%; /* Reducir el ancho máximo en pantallas pequeñas */
+    }
+
+    /* Estilos adicionales para dispositivos móviles */
+    button {
+        padding: 12px; /* Reducir el padding en dispositivos móviles */
+        font-size: 14px; /* Reducir el tamaño de fuente en dispositivos móviles */
+    }
+}

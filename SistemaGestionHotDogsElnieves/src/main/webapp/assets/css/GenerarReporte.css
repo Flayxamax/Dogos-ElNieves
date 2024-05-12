@@ -5,7 +5,7 @@ body {
 }
 
 header {
-    background-color: #333;
+    background-color: #950014;
     color: white;
     text-align: center;
     padding: 10px 0;
@@ -29,7 +29,8 @@ header {
 button{
     padding: 10px 20px;
     margin-top: 3%;
-    background-color: #333;
+    margin-left: 5%;
+    background-color: #950014;
     color: white;
     border: none;
     cursor: pointer;
@@ -38,10 +39,15 @@ button{
 .container button {
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #333;
+    margin-right: 5%;
+    background-color: #950014;
     color: white;
     border: none;
     cursor: pointer;
+}
+
+button:hover {
+    background-color: #7b0011; /* Cambio de color al pasar el mouse */
 }
 
 input[type="date"],

@@ -28,4 +28,21 @@ document.addEventListener('DOMContentLoaded', function () {
     botonAgregar.addEventListener('click', function () {
         window.location.href = 'agregarProducto.jsp';
     });
+    
+    const navButtons = document.querySelectorAll('.nav-button');
+
+        navButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const categoria = button.dataset.categoria;
+                const productos = document.querySelectorAll('.producto');
+
+                productos.forEach(producto => {
+                    if (categoria === 'todo' || producto.dataset.categoria === categoria) {
+                        producto.style.display = 'block';
+                    } else {
+                        producto.style.display = 'none';
+                    }
+                });
+            });
+        });
 });

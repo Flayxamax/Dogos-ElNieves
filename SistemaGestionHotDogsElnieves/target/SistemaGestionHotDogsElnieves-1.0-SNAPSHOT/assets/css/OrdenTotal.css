@@ -5,7 +5,7 @@ body {
 }
 
 header {
-    background-color: #333;
+    background-color: #950014;
     color: white;
     text-align: center;
     padding: 10px 0;
@@ -56,10 +56,18 @@ header {
 button {
     padding: 10px 20px;
     margin-top: 5%;
-    background-color: #333;
+    background-color: #950014;
     color: white;
     border: none;
     cursor: pointer;
+}
+
+.finalizarOrden{
+    background-color: #950014;
+}
+
+.finalizarOrdenTarjeta{
+    background-color: #950014;
 }
 
 .quitar {

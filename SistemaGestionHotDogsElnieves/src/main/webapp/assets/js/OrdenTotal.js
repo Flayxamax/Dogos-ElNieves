@@ -63,6 +63,10 @@ document.addEventListener('DOMContentLoaded', function () {
             cambioSpan.textContent = `$${cambio.toFixed(2)}`;
         });
     }
+    
+    function validarNumero(evento) {
+    evento.value = evento.value.replace(/[^0-9]/g,"");
+}
 
     // Función para enviar la orden al servidor
     function enviarOrdenAlServidor(orden) {
@@ -94,8 +98,17 @@ document.addEventListener('DOMContentLoaded', function () {
         const montoPagadoInput = document.getElementById('monto');
         const montoPagado = parseFloat(montoPagadoInput.value);
         const cambio = montoPagado - total;
+        const cambioSpan = document.getElementById('cambio');
         const orden = obtenerOrdenDesdeSesion();
         const tipoPago = "efectivo";
+        
+        const cambioNumerico = parseFloat(cambioSpan.textContent.replace('$', ''));
+
+        // Verificar si el cambio es menor que cero
+        if (montoPagado < total || isNaN(cambio)) {
+            alert("El monto pagado es menor que el total de la orden. Por favor, ingrese un monto válido.");
+            return; // Detener la ejecución si el cambio es negativo
+        }
 
         // Agregar el tipo de pago al objeto de la orden
         orden.tipoPago = tipoPago;
@@ -118,6 +131,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const cambio = montoPagado - total;
         const orden = obtenerOrdenDesdeSesion();
         const tipoPago = "tarjeta";
+        const productosOrden = document.querySelector('.productos-orden');
+        
+        if(productosOrden.lenght===0){
+            alert("No hay productos en la orden para pagar.");
+            return;
+        }
 
         // Agregar el tipo de pago al objeto de la orden
         orden.tipoPago = tipoPago;
