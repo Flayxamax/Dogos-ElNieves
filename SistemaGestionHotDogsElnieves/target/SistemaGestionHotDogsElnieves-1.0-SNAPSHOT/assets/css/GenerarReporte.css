@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container label,
+.container input {
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button{
+    padding: 10px 20px;
+    margin-top: 3%;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.container button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="date"],
+button {
+    padding: 10px;
+}
+
+input[type="date"]:focus,
+button:focus {
+    outline: none;
+}
+
+@media only screen and (min-width: 600px) {
+    .container {
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .container label,
+    .container input,
+    .container button {
+        margin-bottom: 0;
+        margin-right: 10px; /* Espacio entre elementos */
+    }
+    
+    .container button {
+        margin-top: 0;
+    }
+    
+    .container label {
+        width: auto;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .container label {
+        margin-top: 20px;
+        margin-right: 10px; 
+    }
+
+    .container input[type="date"] {
+        margin-top: 20px;
+        flex: 1; 
+    }
+
+    .container button {
+        margin-top: 20px;   
+    }
+}

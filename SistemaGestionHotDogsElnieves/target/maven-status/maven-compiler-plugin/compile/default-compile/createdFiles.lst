@@ -1,3 +1,4 @@
 servlets\VentaServlet.class
 com\itson\sistemagestionhotdogselnieves\resources\JakartaEE8Resource.class
 com\itson\sistemagestionhotdogselnieves\JakartaRestConfiguration.class
+servlets\ReporteVentaServlet.class

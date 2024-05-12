@@ -1,7 +1,10 @@
 com\itson\dogos_controller\UsuarioJpaController.class
 com\itson\dogos_controller\ProveedorJpaController.class
+com\itson\negocio\Test.class
+com\itson\dogos_controller\pruebaController.class
 com\itson\negocio\VentaNegocio.class
 com\itson\dogos_controller\OrdenJpaController.class
+com\itson\negocio\Test2.class
 com\itson\dogos_controller\exceptions\NonexistentEntityException.class
 com\itson\dogos_controller\CompraJpaController.class
 com\itson\negocio\ProductoNegocio.class
@@ -13,4 +16,4 @@ com\itson\dogos_controller\exceptions\IllegalOrphanException.class
 com\itson\dogos_controller\InsumoJpaController.class
 com\itson\dogos_controller\CompraInsumoJpaController.class
 com\itson\dogos_controller\ProductoJpaController.class
-com\itson\negocio\sexo.class
+com\itson\negocio\ReporteNegocio.class

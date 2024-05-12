@@ -95,6 +95,30 @@ public class Test {
         ProductoJpaController pjcc = new ProductoJpaController(emf);
         pjcc.create(producto);
         
+        Producto producto2 = new Producto();
+        producto2.setNombre("Jumbo");
+        producto2.setPrecio(60);
+        producto2.setCategoria(CategoriaProducto.dogo);
+        pjcc.create(producto2);
+        
+        Producto producto3 = new Producto();
+        producto3.setNombre("Coca-cola");
+        producto3.setPrecio(20);
+        producto3.setCategoria(CategoriaProducto.bebida);
+        pjcc.create(producto3);
+        
+        Producto producto4 = new Producto();
+        producto4.setNombre("Sencilla");
+        producto4.setPrecio(85);
+        producto4.setCategoria(CategoriaProducto.hamburguesa);
+        pjcc.create(producto4);
+        
+        Producto producto5 = new Producto();
+        producto5.setNombre("Orden papas");
+        producto5.setPrecio(35);
+        producto5.setCategoria(CategoriaProducto.extra);
+        pjcc.create(producto5);
+        
         InsumoProducto insumoProducto1 = new InsumoProducto();
         insumoProducto1.setInsumo(insumo);
         insumoProducto1.setProducto(producto);
