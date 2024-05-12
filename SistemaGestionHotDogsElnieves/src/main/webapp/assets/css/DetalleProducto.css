@@ -22,6 +22,13 @@ p {
     padding-bottom: 8px;
 }
 
+.form-group {
+    display: block;
+    font-weight: bold;
+    padding-bottom: 8px;
+    margin-top: 5%;
+}
+
 label {
     display: block;
     font-weight: bold;
@@ -35,7 +42,7 @@ input[type="text"] {
     border-radius: 4px;
 }
 
-input[type="number"] {
+input[type="password"] {
     width: calc(100% - 20px); /* Teniendo en cuenta el padding */
     padding: 8px;
     border: 1px solid #ccc;
@@ -54,6 +61,7 @@ input[type="number"] {
 button {
     width: 100%; /* Para ocupar el ancho del contenedor */
     padding: 15px; /* Reducido un poco el padding */
+    margin-top: 5%;
     background-color: #950014;
     color: white;
     border: none;
