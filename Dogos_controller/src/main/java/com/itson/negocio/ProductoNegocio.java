@@ -23,4 +23,30 @@ public class ProductoNegocio {
         List<Producto> listaProductos = pjc.findProductoEntities();
         return listaProductos;
     }
+    
+    public Producto getProducto(Long idProducto){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.itson_Dogos_model_jar_1.0-SNAPSHOTPU");
+
+        ProductoJpaController pjc = new ProductoJpaController(emf);
+        Producto producto = pjc.findProducto(idProducto);
+        return producto;
+    }
+    
+    public void editarProducto(Producto producto) throws Exception{
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.itson_Dogos_model_jar_1.0-SNAPSHOTPU");
+        ProductoJpaController pjc = new ProductoJpaController(emf);
+        pjc.edit(producto);
+    }
+    
+    public void eliminarProducto(Long idProducto) throws Exception{
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.itson_Dogos_model_jar_1.0-SNAPSHOTPU");
+        ProductoJpaController pjc = new ProductoJpaController(emf);
+        pjc.destroy(idProducto);
+    }
+    
+    public void agregarProducto(Producto producto) throws Exception{
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.itson_Dogos_model_jar_1.0-SNAPSHOTPU");
+        ProductoJpaController pjc = new ProductoJpaController(emf);
+        pjc.create(producto);
+    }
 }
