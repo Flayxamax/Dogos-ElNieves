@@ -26,7 +26,7 @@ header {
     box-sizing: border-box;
 }
 
-button{
+button {
     padding: 10px 20px;
     margin-top: 3%;
     margin-left: 5%;
@@ -38,6 +38,7 @@ button{
 
 .container button {
     margin-top: 20px;
+    margin-bottom: 20px;
     padding: 10px 20px;
     margin-right: 5%;
     background-color: #950014;
@@ -47,7 +48,7 @@ button{
 }
 
 button:hover {
-    background-color: #7b0011; /* Cambio de color al pasar el mouse */
+    background-color: #7b0011;
 }
 
 input[type="date"],
@@ -60,47 +61,23 @@ button:focus {
     outline: none;
 }
 
-@media only screen and (min-width: 600px) {
-    .container {
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-start;
-    }
+.container-iframe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 50px;
+}
 
-    .container label,
-    .container input,
-    .container button {
-        margin-bottom: 0;
-        margin-right: 10px; /* Espacio entre elementos */
-    }
-    
-    .container button {
-        margin-top: 0;
-    }
-    
-    .container label {
-        width: auto;
-    }
+iframe {
+    width: 80vw;
+    height: 80vh; 
+    border: 1px solid #ccc; 
 }
 
 @media only screen and (min-width: 768px) {
-    .container {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .container label {
-        margin-top: 20px;
-        margin-right: 10px; 
-    }
-
-    .container input[type="date"] {
-        margin-top: 20px;
-        flex: 1; 
-    }
-
-    .container button {
-        margin-top: 20px;   
+    iframe {
+        width: 60vw;
+        height: 80vh;
     }
 }

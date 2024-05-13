@@ -36,7 +36,7 @@ public class ReporteNegocio {
     public Calendar convertirStringACalendar(String fechaString) {
         String[] partesFecha = fechaString.split("-");
         int anio = Integer.parseInt(partesFecha[0]);
-        int mes = Integer.parseInt(partesFecha[1]) - 1; // Restar 1 porque en Calendar el mes empieza en 0
+        int mes = Integer.parseInt(partesFecha[1]) - 1;
         int dia = Integer.parseInt(partesFecha[2]);
 
         Calendar calendar = Calendar.getInstance();
@@ -45,11 +45,13 @@ public class ReporteNegocio {
         return calendar;
     }
 
-    public void calcularProductos(List<Venta> listaVentas) {
+    public double calcularTotalProductos(List<Venta> listaVentas) {
         Map<Integer, Integer> cantidadProductosPorId = new HashMap<>();
         Map<Integer, Double> totalPrecioPorOrden = new HashMap<>();
         Map<Integer, String> nombreProductosPorId = obtenerNombresProductos();
-
+        
+        double total = 0;
+        
         for (Venta venta : listaVentas) {
             int idProducto = venta.getProducto().getId().intValue();
             int cantidad = 1; //cada venta cuenta como 1 unidad del producto
@@ -63,6 +65,8 @@ public class ReporteNegocio {
             int cantidadTotal = cantidadProductosPorId.get(idProducto);
             double precioIndividual = totalPrecioPorOrden.get(idProducto) / cantidadTotal; // Calcular el precio individual
             double totalPrecio = totalPrecioPorOrden.get(idProducto);
+            double gananciaProducto = precioIndividual * cantidadTotal;
+            total += gananciaProducto;
             String nombreProducto = nombreProductosPorId.get(idProducto);
 
             System.out.println("ID Producto: " + idProducto);
@@ -72,6 +76,7 @@ public class ReporteNegocio {
             System.out.println("Total precio: " + totalPrecio);
             System.out.println("--------------------------------------");
         }
+        return total;
     }
 
     public Map<Integer, String> obtenerNombresProductos() {

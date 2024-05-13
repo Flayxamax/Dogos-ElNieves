@@ -124,7 +124,8 @@ public class ReporteVentaServlet extends HttpServlet {
     private void exportarReporteVenta(HttpServletRequest request, HttpServletResponse response, Calendar desdeCalendar, Calendar hastaCalendar) throws ServletException, IOException {
         ReporteNegocio rn = new ReporteNegocio();
         List<Venta> ventas = rn.getVentasEnPeriodo(desdeCalendar, hastaCalendar);
-        List<Map<String, Object>> dataSource = calcularProductos(ventas);
+        double total = rn.calcularTotalProductos(ventas);
+        List<Map<String, Object>> dataSource = calcularProductos(ventas, total);
 
         try (ServletOutputStream out = response.getOutputStream()) {
             InputStream logoEmpresa = this.getServletConfig().getServletContext().getResourceAsStream("assets/reportesJasper/img/logoelnieves.jpg");
@@ -158,15 +159,13 @@ public class ReporteVentaServlet extends HttpServlet {
         }
     }
 
-    public List<Map<String, Object>> calcularProductos(List<Venta> listaVentas) {
+    public List<Map<String, Object>> calcularProductos(List<Venta> listaVentas, double total) {
         Map<Integer, Integer> cantidadProductosPorId = new HashMap<>();
         Map<Integer, Double> totalPrecioPorOrden = new HashMap<>();
         ReporteNegocio rn = new ReporteNegocio();
         Map<Integer, String> nombreProductosPorId = rn.obtenerNombresProductos();
 
         List<Map<String, Object>> dataSource = new ArrayList<>();
-
-        double total = 0;
 
         for (Venta venta : listaVentas) {
             int idProducto = venta.getProducto().getId().intValue();
@@ -183,14 +182,14 @@ public class ReporteVentaServlet extends HttpServlet {
             String nombreProducto = nombreProductosPorId.get(idProducto);
 
             double gananciaProducto = precioIndividual * cantidadTotal;
-            total += gananciaProducto;
 
             Map<String, Object> ventaMap = new HashMap<>();
             ventaMap.put("nombre", nombreProducto);
             ventaMap.put("precio", precioIndividual);
             ventaMap.put("cantidad", cantidadTotal);
             ventaMap.put("gananciaProducto", gananciaProducto);
-            
+            ventaMap.put("gananciaBruta", total);
+
             dataSource.add(ventaMap);
         }
 

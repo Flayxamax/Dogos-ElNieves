@@ -23,22 +23,18 @@ function enviarFechas() {
         },
         body: JSON.stringify(fechas)
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al enviar las fechas.');
-            }
-            // Si la respuesta es un archivo PDF, descárgalo en lugar de interpretarlo como JSON
-            response.blob().then(blob => {
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al enviar las fechas.');
+                }
+                return response.blob();
+            })
+            .then(blob => {
                 const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'ReporteVenta.pdf';
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
+                const iframe = document.querySelector('iframe');
+                iframe.src = url;
+            })
+            .catch(error => {
+                console.error('Error:', error);
             });
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
 }
