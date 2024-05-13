@@ -1,5 +1,5 @@
 function regresar() {
-    // Código para regresar o cualquier acción necesaria
+     window.location.href = 'http://localhost:8080/SistemaGestionHotDogsElnieves/Productos';
 }
 
 function enviarFechas() {

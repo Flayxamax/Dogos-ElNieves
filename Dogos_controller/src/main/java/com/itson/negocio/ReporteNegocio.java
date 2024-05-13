@@ -68,13 +68,6 @@ public class ReporteNegocio {
             double gananciaProducto = precioIndividual * cantidadTotal;
             total += gananciaProducto;
             String nombreProducto = nombreProductosPorId.get(idProducto);
-
-            System.out.println("ID Producto: " + idProducto);
-            System.out.println("Nombre del producto: " + nombreProducto);
-            System.out.println("Precio individual: " + precioIndividual);
-            System.out.println("Cantidad total de productos: " + cantidadTotal);
-            System.out.println("Total precio: " + totalPrecio);
-            System.out.println("--------------------------------------");
         }
         return total;
     }

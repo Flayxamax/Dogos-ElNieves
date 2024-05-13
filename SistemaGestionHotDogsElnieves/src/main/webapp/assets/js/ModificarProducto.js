@@ -5,33 +5,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function cargarCategorias() {
     fetch('http://localhost:8080/SistemaGestionHotDogsElnieves/Categorias')
-        .then(response => response.json())
-        .then(data => {
+            .then(response => response.json())
+            .then(data => {
 
-            var categoriaSelect = document.getElementById('categoria');
+                var categoriaSelect = document.getElementById('categoria');
 
-            categoriaSelect.innerHTML = '';
+                categoriaSelect.innerHTML = '';
 
-            var categoriaProducto = document.getElementById('categoriaProducto').value;
+                var categoriaProducto = document.getElementById('categoriaProducto').value;
 
-            data.forEach(categoria => {
-                var option = document.createElement('option');
-                option.value = categoria;
-                option.text = categoria;
+                data.forEach(categoria => {
+                    var option = document.createElement('option');
+                    option.value = categoria;
+                    option.text = categoria;
 
-                if (categoria === categoriaProducto) {
-                    option.selected = true;
-                }
+                    if (categoria === categoriaProducto) {
+                        option.selected = true;
+                    }
 
-                categoriaSelect.appendChild(option);
-            });
-        })
-        .catch(error => console.error('Error al cargar las categorías:', error));
+                    categoriaSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error al cargar las categorías:', error));
 }
 
 function modificarProducto() {
     var nombreInput = document.querySelector('input[type="text"][name="nombre"]');
-    var precioInput = document.querySelector('input[type="number"][name="precio"]');
+    var precioInput = document.querySelector('input[type="text"][name="precio"]');
     var categoriaSelect = document.getElementById('categoria');
     var idProducto = document.getElementById('idProducto').value;
 
@@ -51,7 +51,7 @@ function modificarProducto() {
 
 function guardarProducto() {
     var nuevoNombre = document.querySelector('input[type="text"][name="nombre"]').value;
-    var nuevoPrecio = document.querySelector('input[type="number"][name="precio"]').value;
+    var nuevoPrecio = document.querySelector('input[type="text"][name="precio"]').value;
     var nuevaCategoria = document.getElementById('categoria').value;
     var idProducto = document.getElementById('idProducto').value;
 
@@ -69,22 +69,22 @@ function guardarProducto() {
         },
         body: JSON.stringify(data)
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al modificar el producto');
-            }
-            return response.json();
-        })
-        .then(productoModificado => {
-            document.querySelector('input[type="text"][name="nombre"]').value = productoModificado.nombre;
-            document.querySelector('input[type="number"][name="precio"]').value = productoModificado.precio;
-            document.getElementById('categoria').value = productoModificado.categoria;
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al modificar el producto');
+                }
+                return response.json();
+            })
+            .then(productoModificado => {
+                document.querySelector('input[type="text"][name="nombre"]').value = productoModificado.nombre;
+                document.querySelector('input[type="text"][name="precio"]').value = productoModificado.precio;
+                document.getElementById('categoria').value = productoModificado.categoria;
 
-            alert('Producto modificado exitosamente');
+                alert('Producto modificado exitosamente');
 
-            window.location.reload();
-        })
-        .catch(error => console.error('Error al modificar el producto:', error));
+                window.location.reload();
+            })
+            .catch(error => console.error('Error al modificar el producto:', error));
 }
 
 
@@ -97,24 +97,24 @@ function eliminarProducto() {
             'Content-Type': 'application/json'
         }
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al eliminar el producto');
-            }
-            return response.text();
-        })
-        .then(responseData => {
-            alert('Producto eliminado exitosamente');
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al eliminar el producto');
+                }
+                return response.text();
+            })
+            .then(responseData => {
+                alert('Producto eliminado exitosamente');
 
-            window.location.href = 'http://localhost:8080/SistemaGestionHotDogsElnieves/Productos';
-        })
-        .catch(error => console.error('Error al eliminar el producto:', error));
+                window.location.href = 'http://localhost:8080/SistemaGestionHotDogsElnieves/Productos';
+            })
+            .catch(error => console.error('Error al eliminar el producto:', error));
 }
 
 function cancelarEdicion() {
 
     document.querySelector('input[type="text"][name="nombre"]').setAttribute('readonly', true);
-    document.querySelector('input[type="number"][name="precio"]').setAttribute('readonly', true);
+    document.querySelector('input[type="text"][name="precio"]').setAttribute('readonly', true);
     document.getElementById('categoria').setAttribute('disabled', true);
 
     document.getElementById('botonGuardar').style.display = 'none';
@@ -123,7 +123,7 @@ function cancelarEdicion() {
     document.getElementById('botonModificar').style.display = 'block';
     document.getElementById('botonEliminar').style.display = 'block';
 
-    window.location.reload()
+    window.location.reload();
 }
 
 function regresar() {
@@ -131,5 +131,5 @@ function regresar() {
 }
 
 function regresarAtras() {
-    window.history.back();
+    window.location.href = 'http://localhost:8080/SistemaGestionHotDogsElnieves/Productos';
 }
