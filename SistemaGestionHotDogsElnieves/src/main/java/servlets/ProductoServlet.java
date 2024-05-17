@@ -18,7 +18,7 @@ public class ProductoServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
-        
+
         if (action == null) {
             processObtenerProductos(request, response);
         } else {
@@ -35,11 +35,11 @@ public class ProductoServlet extends HttpServlet {
         try {
             ProductoNegocio productoNegocio = new ProductoNegocio();
             List<Producto> productos = productoNegocio.getListaProductos();
-            
+
             request.setAttribute("productos", productos);
         } catch (Exception e) {
             request.setAttribute("error", e.getMessage());
-        } 
+        }
         String paginaDestino = "/Productos.jsp";
         getServletContext().getRequestDispatcher(paginaDestino).forward(request, response);
     }

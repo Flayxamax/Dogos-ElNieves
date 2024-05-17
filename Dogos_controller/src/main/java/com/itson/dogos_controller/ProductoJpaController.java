@@ -135,4 +135,12 @@ public class ProductoJpaController implements Serializable {
         }
     }
     
+    public Producto findProductoNombre(String name) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.find(Producto.class, name);
+        } finally {
+            em.close();
+        }
+    }
 }

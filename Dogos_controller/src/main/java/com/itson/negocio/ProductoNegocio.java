@@ -51,4 +51,15 @@ public class ProductoNegocio {
         ProductoJpaController pjc = new ProductoJpaController(emf);
         pjc.create(producto);
     }
+    
+    public boolean productoExistente(String name) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.itson_Dogos_model_jar_1.0-SNAPSHOTPU");
+
+        ProductoJpaController pjc = new ProductoJpaController(emf);
+        Producto producto = pjc.findProductoNombre(name);
+        if(producto.getId()==null){
+            return false;
+        }
+        return true;
+    }
 }

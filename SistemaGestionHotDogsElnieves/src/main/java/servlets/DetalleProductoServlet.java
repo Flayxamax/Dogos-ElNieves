@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "DetalleProductoServlet", urlPatterns = {"/DetalleProducto"})
 public class DetalleProductoServlet extends HttpServlet {
+    ProductoNegocio productoNegocio = new ProductoNegocio();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -72,7 +73,7 @@ public class DetalleProductoServlet extends HttpServlet {
         }
     }
 
-    @Override
+@Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -86,27 +87,32 @@ public class DetalleProductoServlet extends HttpServlet {
         Gson gson = new Gson();
         Producto productoModificado = gson.fromJson(requestBody, Producto.class);
 
-
         try {
 
-            ProductoNegocio productoNegocio = new ProductoNegocio();
-            productoNegocio.editarProducto(productoModificado);
-            productoModificado = productoNegocio.getProducto(productoModificado.getId());
-            String productoJson = gson.toJson(productoModificado);
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(productoJson);
-        } catch (NumberFormatException e) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write("Error: formato de parámetros inválido");
-        } catch (IllegalArgumentException e) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write("Error: categoría de producto inválida");
-        } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            response.getWriter().write("Error al modificar el producto: " + e.getMessage());
+                if (productoModificado.getPrecio() < 0) {
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    response.getWriter().write("Error: El precio no puede ser negativo");
+                    return;
+                }
+                
+                ProductoNegocio productoNegocio = new ProductoNegocio();
+                productoNegocio.editarProducto(productoModificado);
+                productoModificado = productoNegocio.getProducto(productoModificado.getId());
+                String productoJson = gson.toJson(productoModificado);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(productoJson);
+            } catch (NumberFormatException e) {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                response.getWriter().write("Error: formato de parámetros inválido");
+            } catch (IllegalArgumentException e) {
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                response.getWriter().write("Error: categoría de producto inválida");
+            } catch (Exception e) {
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                response.getWriter().write("Error al modificar el producto: " + e.getMessage());
+            }
         }
-    }
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)

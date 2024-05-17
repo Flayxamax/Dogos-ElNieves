@@ -12,21 +12,18 @@
             <h1>Total</h1>
         </header>
 
-        <button onclick="regresarAOrdenes()">Regresar a Ordenes</button>
+        <button id="regresarOrdenesBtn">Regresar a Ordenes</button>
 
         <div class="container">
             <section class="resumen-orden">
                 <h2>Resumen de Orden</h2>
                 <div class="productos-orden">
-
                     <div class="producto-resumen">
                         <span class="nombre"></span>
                     </div>
-
-
                 </div>
                 <div class="total">
-                    Total: 100.00 
+                    Total: <span id="totalOrden"></span>
                 </div>
                 <button class="finalizarOrdenTarjeta">Pago con tarjeta</button>
             </section>

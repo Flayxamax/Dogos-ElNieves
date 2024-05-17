@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (ordenProductos.length === 0) {
             alert("No hay productos en la orden para pagar.");
-            return; 
+            return;
         }
         const ordenJSON = JSON.stringify({
             productos: ordenProductos
@@ -101,5 +101,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-
+    const ordenGuardada = sessionStorage.getItem('ordenJSON');
+    if (ordenGuardada) {
+        ordenProductos = JSON.parse(ordenGuardada).productos;
+        actualizarOrden();
+    }
 });

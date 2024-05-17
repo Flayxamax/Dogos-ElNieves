@@ -69,22 +69,31 @@ function guardarProducto() {
         },
         body: JSON.stringify(data)
     })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error al modificar el producto');
-                }
-                return response.json();
-            })
-            .then(productoModificado => {
-                document.querySelector('input[type="text"][name="nombre"]').value = productoModificado.nombre;
-                document.querySelector('input[type="text"][name="precio"]').value = productoModificado.precio;
-                document.getElementById('categoria').value = productoModificado.categoria;
+    .then(response => {
+        if (!response.ok) {
+            if (response.status === 400) {
+                throw new Error('Error: El servidor no pudo procesar la solicitud correctamente.');
+            } else {
+                throw new Error('Error al modificar el producto');
+            }
+        }
+        return response.json();
+    })
+    .then(productoModificado => {
+        document.querySelector('input[name="nombre"]').value = productoModificado.nombre;
+        document.querySelector('input[name="precio"]').value = productoModificado.precio;
+        document.getElementById('categoria').value = productoModificado.categoria;
 
-                alert('Producto modificado exitosamente');
+        alert('Producto modificado exitosamente');
 
-                window.location.reload();
-            })
-            .catch(error => console.error('Error al modificar el producto:', error));
+        window.location.reload();
+    })
+    .catch(error => {
+        console.error('Error al modificar el producto:', error);
+        if (error.message === 'Error: El servidor no pudo procesar la solicitud correctamente.') {
+            alert('Error: Los datos enviados no son válidos.');
+        }
+    });
 }
 
 
