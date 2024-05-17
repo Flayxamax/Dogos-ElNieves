@@ -25,6 +25,7 @@ function enviarFechas() {
     })
             .then(response => {
                 if (!response.ok) {
+                    alert('Error al generar el reporte');
                     throw new Error('Error al enviar las fechas.');
                 }
                 return response.blob();

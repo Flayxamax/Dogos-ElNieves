@@ -130,7 +130,11 @@ public class ReporteVentaServlet extends HttpServlet {
         try (ServletOutputStream out = response.getOutputStream()) {
             InputStream logoEmpresa = this.getServletConfig().getServletContext().getResourceAsStream("assets/reportesJasper/img/logoelnieves.jpg");
             InputStream reporteVenta = this.getServletConfig().getServletContext().getResourceAsStream("assets/reportesJasper/ReporteVenta.jasper");
-
+            if(ventas.isEmpty()){
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                response.getWriter().write("No se encontraron ventas en ese periodo");
+                return;
+            }
             if (logoEmpresa != null && reporteVenta != null) {
                 response.setContentType("application/pdf");
                 response.addHeader("Content-disposition", "inline; filename=ReportesVenta.pdf");

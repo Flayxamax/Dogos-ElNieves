@@ -57,7 +57,6 @@ public class DetalleProductoServlet extends HttpServlet {
         Producto nuevoProducto = gson.fromJson(requestBody, Producto.class);
 
         try {
-
             if (nuevoProducto.getNombre() == null || nuevoProducto.getPrecio() <= 0) {
                 throw new IllegalArgumentException("Nombre o precio inválido");
             }
@@ -99,24 +98,24 @@ public class DetalleProductoServlet extends HttpServlet {
         productoModificado.setId(idProducto);
         productoModificado.setNombre(Nombre);
         productoModificado.setPrecio(Precio);
-           switch (Categoria.toLowerCase()) {
-        case "bebida":
-            productoModificado.setCategoria(CategoriaProducto.bebida);
-            break;
-        case "dogo":
-            productoModificado.setCategoria(CategoriaProducto.dogo);
-            break;
-        case "extra":
-            productoModificado.setCategoria(CategoriaProducto.extra);
-            break;
-        case "hamburguesa":
-            productoModificado.setCategoria(CategoriaProducto.hamburguesa);
-            break;
-        default:
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write("Error: Categoría de producto inválida");
-            return;
-    }
+        switch (Categoria.toLowerCase()) {
+            case "bebida":
+                productoModificado.setCategoria(CategoriaProducto.bebida);
+                break;
+            case "dogo":
+                productoModificado.setCategoria(CategoriaProducto.dogo);
+                break;
+            case "extra":
+                productoModificado.setCategoria(CategoriaProducto.extra);
+                break;
+            case "hamburguesa":
+                productoModificado.setCategoria(CategoriaProducto.hamburguesa);
+                break;
+            default:
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                response.getWriter().write("Error: Categoría de producto inválida");
+                return;
+        }
         try {
             // Validar el precio
             if (productoModificado.getPrecio() < 0) {

@@ -117,21 +117,27 @@ public class VentaJpaController implements Serializable {
             em.close();
         }
     }
-    
-    public List<Venta> findVentas(Calendar fechaInicio, Calendar fechaFin){
+
+    public List<Venta> findVentas(Calendar fechaInicio, Calendar fechaFin) {
         EntityManager em = getEntityManager();
-        
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Venta> criteriaQuery = criteriaBuilder.createQuery(Venta.class);
         Root<Venta> root = criteriaQuery.from(Venta.class);
-
-        Predicate predicate = criteriaBuilder.between(root.get("fecha"), fechaInicio, fechaFin);
-        criteriaQuery.where(predicate);
-
-        return em.createQuery(criteriaQuery).getResultList();
         
+        fechaInicio = getInicioDia(fechaInicio);
+        fechaFin = getFinalDia(fechaFin);
+        
+        Predicate predicate;
+        if (mismoDia(fechaInicio,fechaFin)) {
+             predicate = criteriaBuilder.between(root.get("fecha"), fechaInicio, fechaFin);
+        } else {
+            predicate = criteriaBuilder.between(root.get("fecha"), fechaInicio, fechaFin);
+        }
+        criteriaQuery.where(predicate);
+        return em.createQuery(criteriaQuery).getResultList();
+
     }
-    
+
     public Venta findVenta(Long id) {
         EntityManager em = getEntityManager();
         try {
@@ -153,5 +159,25 @@ public class VentaJpaController implements Serializable {
             em.close();
         }
     }
+
+    private Calendar getInicioDia(Calendar fecha) {
+        fecha.set(Calendar.HOUR_OF_DAY, 0);
+        fecha.set(Calendar.MINUTE, 0);
+        fecha.set(Calendar.SECOND, 0);
+        fecha.set(Calendar.MILLISECOND, 0);
+        return fecha;
+    }
     
+     private Calendar getFinalDia(Calendar fecha) {
+        fecha.set(Calendar.HOUR_OF_DAY, 23);
+        fecha.set(Calendar.MINUTE, 59);
+        fecha.set(Calendar.SECOND, 59);
+        fecha.set(Calendar.MILLISECOND, 999);
+        return fecha;
+    }
+     
+     private boolean mismoDia(Calendar fechaInicio, Calendar fechaFin){
+         return fechaInicio.get(Calendar.YEAR) == fechaFin.get(Calendar.YEAR) && fechaInicio.get(Calendar.DAY_OF_YEAR) == fechaFin.get(Calendar.DAY_OF_YEAR);
+     }
+
 }

@@ -81,7 +81,6 @@ function guardarProducto() {
             return response.json();
         })
         .then(productoModificado => {
-            // Se ejecuta cuando la respuesta es exitosa (response.ok === true)
             document.querySelector('input[name="nombre"]').value = productoModificado.nombre;
             document.querySelector('input[name="precio"]').value = productoModificado.precio;
             document.getElementById('categoria').value = productoModificado.categoria;
