@@ -32,6 +32,7 @@
                     <input type="password" id="pass" name="pass" placeholder="Ingrese su Contraseña" required>
                 </div>
                 <button type="submit" onclick="iniciarSesion()">Iniciar Sesión</button>
+                <button class="submit" onclick="window.location.href = 'index.html';">Regresar</button>
             </div>
         </div>
     </body>

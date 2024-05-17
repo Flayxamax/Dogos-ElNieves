@@ -14,7 +14,7 @@
         <header>
             <h1>Cobrar orden</h1>
         </header>
-
+        
         <nav>
             <button class="nav-button" data-categoria="todo">Todo</button>
             <button class="nav-button" data-categoria="dogo">Dogos</button>
@@ -23,6 +23,7 @@
             <button class="nav-button" data-categoria="extra">Extras</button>
         </nav>
 
+        <button class="botonRegresar" onclick="window.location.href = 'index.html';">Regresar</button>
         <section class="productos">
             <h2>Productos</h2>
             <div class="scroll-wrapper" id="productos-container">

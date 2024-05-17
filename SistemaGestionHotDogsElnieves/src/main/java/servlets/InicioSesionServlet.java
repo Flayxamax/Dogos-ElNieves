@@ -62,8 +62,8 @@ public class InicioSesionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.sendRedirect("login.jsp");
+       String paginaDestino = "/login.jsp";
+        getServletContext().getRequestDispatcher(paginaDestino).forward(request, response);
     }
 
     /**
@@ -77,7 +77,6 @@ public class InicioSesionServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Leer los datos del JSON enviado por fetch
         BufferedReader reader = request.getReader();
         StringBuilder jsonBuilder = new StringBuilder();
         String line;
@@ -86,23 +85,19 @@ public class InicioSesionServlet extends HttpServlet {
         }
 
         String requestBody = jsonBuilder.toString();
-        // Convertir los datos del JSON a un objeto Java
         Gson gson = new Gson();
         Usuario datosInicioSesion = gson.fromJson(requestBody, Usuario.class);
 
         try {
-            // Obtener el usuario y la contraseña del objeto Java
             String usuario = datosInicioSesion.getNombre();
             String contrasenia = datosInicioSesion.getContrasena();
 
-            // Realizar la validación del usuario (debes implementar esta lógica)
             UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
             System.out.println(usuario + contrasenia);
             TipoUsuario usuarioValido = usuarioNegocio.obtenerTipoUsuario(usuario, contrasenia);
             System.out.println(usuarioValido);
 
             if (usuarioValido.equals(TipoUsuario.ADMIN)) {
-                // Si el usuario es válido, redirigir a la página de éxito
                 response.setStatus(HttpServletResponse.SC_OK);
             } else if (usuarioValido.equals(TipoUsuario.NORMAL)) {
                  response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Productos</title>
-        <link rel="stylesheet" href="assets/css/CobrarOrden.css">
+        <link rel="stylesheet" href="assets/css/Productos.css">
         <script src="assets/js/Productos.js"></script>
     </head>
     <body>
@@ -23,26 +23,31 @@
             <button class="nav-button" data-categoria="extra">Extras</button>
         </nav>
 
+        <button class="botonRegresar" onclick="window.location.href = 'index.html';">Regresar</button>
+
         <section class="productos">
             <h2>Productos</h2>
-            <div class="scroll-wrapper" id="productos-container">
-                <c:forEach var="producto" items="${productos}">
-                    <div class="producto" data-categoria="${producto.categoria}" data-id="${producto.id}">
-                        <div class="info">
-                            <span class="nombre">${producto.nombre}</span>
-                            <div class="detalle">
-                                <span class="precio">$${producto.precio}</span>
-                            </div>
-                        </div>
-                        <button class="modificar">Modificar</button>
-                    </div>
-                </c:forEach>
+            <div class="productos-container">
+                <table class="tabla-productos">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Modificar</th>
+                    </tr>
+                    <c:forEach var="producto" items="${productos}">                        
+                        <tr class="producto" data-categoria="${producto.categoria}" data-id="${producto.id}">
+                            <td>${producto.nombre}</td>
+                            <td>$${producto.precio}</td>
+                            <td><button class="modificar">Modificar</button></td>
+                        </tr>
+                    </c:forEach>
+                </table>
             </div>
         </section>
-        <button class="agregar" onclick="ventanaAgregar()">Agregar producto</button>
-        <br>
-        <br>
-        <br>
-        <button class="agregar"onclick="window.location.href = 'ReporteVenta';">Reporte Venta</button>    
+
+        <div class="botones">
+            <button class="agregar" onclick="ventanaAgregar()">Agregar producto</button>
+            <button class="agregar" onclick="window.location.href = 'ReporteVenta';">Reporte Venta</button>    
+        </div>
     </body>
 </html>
