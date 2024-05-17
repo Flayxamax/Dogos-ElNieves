@@ -1,4 +1,4 @@
-let nombreOriginal
+let nombreOriginal;
 document.addEventListener('DOMContentLoaded', function () {
 
     cargarCategorias();
@@ -96,25 +96,32 @@ function guardarProducto() {
 function eliminarProducto() {
     var idProducto = document.getElementById('idProducto').value;
 
-    fetch(`http://localhost:8080/SistemaGestionHotDogsElnieves/DetalleProducto?id=${encodeURIComponent(idProducto)}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error al eliminar el producto');
-                }
-                return response.text();
-            })
-            .then(responseData => {
-                alert('Producto eliminado exitosamente');
+    let confirmar = confirm('¿Estás seguro de que deseas eliminar este producto?');
 
-                window.location.href = 'http://localhost:8080/SistemaGestionHotDogsElnieves/Productos';
-            })
-            .catch(error => console.error('Error al eliminar el producto:', error));
+    if (confirmar) {
+        fetch(`http://localhost:8080/SistemaGestionHotDogsElnieves/DetalleProducto?id=${encodeURIComponent(idProducto)}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al eliminar el producto');
+            }
+            return response.text();
+        })
+        .then(responseData => {
+            alert('Producto eliminado exitosamente');
+
+            window.location.href = 'http://localhost:8080/SistemaGestionHotDogsElnieves/Productos';
+        })
+        .catch(error => console.error('Error al eliminar el producto:', error));
+    } else {
+        alert('Eliminación de producto cancelada');
+    }
 }
+
 
 function cancelarEdicion() {
 
