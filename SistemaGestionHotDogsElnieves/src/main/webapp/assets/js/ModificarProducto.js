@@ -1,32 +1,34 @@
+let nombreOriginal
 document.addEventListener('DOMContentLoaded', function () {
 
     cargarCategorias();
+    nombreOriginal = document.querySelector('input[type="text"][name="nombre"]');
 });
 
 function cargarCategorias() {
     fetch('http://localhost:8080/SistemaGestionHotDogsElnieves/Categorias')
-            .then(response => response.json())
-            .then(data => {
+        .then(response => response.json())
+        .then(data => {
 
-                var categoriaSelect = document.getElementById('categoria');
+            var categoriaSelect = document.getElementById('categoria');
 
-                categoriaSelect.innerHTML = '';
+            categoriaSelect.innerHTML = '';
 
-                var categoriaProducto = document.getElementById('categoriaProducto').value;
+            var categoriaProducto = document.getElementById('categoriaProducto').value;
 
-                data.forEach(categoria => {
-                    var option = document.createElement('option');
-                    option.value = categoria;
-                    option.text = categoria;
+            data.forEach(categoria => {
+                var option = document.createElement('option');
+                option.value = categoria;
+                option.text = categoria;
 
-                    if (categoria === categoriaProducto) {
-                        option.selected = true;
-                    }
+                if (categoria === categoriaProducto) {
+                    option.selected = true;
+                }
 
-                    categoriaSelect.appendChild(option);
-                });
-            })
-            .catch(error => console.error('Error al cargar las categorías:', error));
+                categoriaSelect.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error al cargar las categorías:', error));
 }
 
 function modificarProducto() {
@@ -34,6 +36,8 @@ function modificarProducto() {
     var precioInput = document.querySelector('input[type="text"][name="precio"]');
     var categoriaSelect = document.getElementById('categoria');
     var idProducto = document.getElementById('idProducto').value;
+
+    nombreOriginal = nombreInput.value;
 
     nombreInput.removeAttribute('readonly');
     precioInput.removeAttribute('readonly');
@@ -57,6 +61,7 @@ function guardarProducto() {
 
     var data = {
         id: idProducto,
+        nombreOriginal: nombreOriginal,
         nombre: nuevoNombre,
         precio: nuevoPrecio,
         categoria: nuevaCategoria
@@ -69,31 +74,23 @@ function guardarProducto() {
         },
         body: JSON.stringify(data)
     })
-    .then(response => {
-        if (!response.ok) {
-            if (response.status === 400) {
-                throw new Error('Error: El servidor no pudo procesar la solicitud correctamente.');
-            } else {
+        .then(response => {
+            if (!response.ok) {
                 throw new Error('Error al modificar el producto');
             }
-        }
-        return response.json();
-    })
-    .then(productoModificado => {
-        document.querySelector('input[name="nombre"]').value = productoModificado.nombre;
-        document.querySelector('input[name="precio"]').value = productoModificado.precio;
-        document.getElementById('categoria').value = productoModificado.categoria;
+            return response.json();
+        })
+        .then(productoModificado => {
+            // Se ejecuta cuando la respuesta es exitosa (response.ok === true)
+            document.querySelector('input[name="nombre"]').value = productoModificado.nombre;
+            document.querySelector('input[name="precio"]').value = productoModificado.precio;
+            document.getElementById('categoria').value = productoModificado.categoria;
 
-        alert('Producto modificado exitosamente');
+            alert('Producto modificado exitosamente');
 
-        window.location.reload();
-    })
-    .catch(error => {
-        console.error('Error al modificar el producto:', error);
-        if (error.message === 'Error: El servidor no pudo procesar la solicitud correctamente.') {
-            alert('Error: Los datos enviados no son válidos.');
-        }
-    });
+            window.location.reload();
+        })
+        .catch(error => console.error('Error al modificar el producto:', error));
 }
 
 
