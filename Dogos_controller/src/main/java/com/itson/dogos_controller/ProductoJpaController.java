@@ -79,7 +79,8 @@ public class ProductoJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The producto with id " + id + " no longer exists.", enfe);
             }
-            em.remove(producto);
+            producto.setActivo(false);
+            em.merge(producto);
             em.getTransaction().commit();
         } finally {
             if (em != null) {

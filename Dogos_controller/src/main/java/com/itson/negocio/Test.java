@@ -47,9 +47,9 @@ public class Test {
 
         UsuarioJpaController usuarioC = new UsuarioJpaController(emf);
         Usuario usuario = new Usuario();
-        usuario.setNombre("Godge Quezada");
-        usuario.setContrasena("qwerty");
-        usuario.setTipo(TipoUsuario.NORMAL);
+        usuario.setNombre("admin");
+        usuario.setContrasena("admin");
+        usuario.setTipo(TipoUsuario.ADMIN);
         usuarioC.create(usuario);
 
         Proveedor proveedor = new Proveedor();

@@ -42,11 +42,10 @@ public class UsuarioNegocio {
             
             return usuario.getTipo(); // Devuelve el tipo de usuario
         } catch (NoResultException e) {
-            // Manejar el caso en el que no se encuentra ningún resultado
             e.printStackTrace();
             return null;
         } finally {
-            em.close(); // Cierra el EntityManager cuando hayas terminado
+            em.close();
         }
     }
 }

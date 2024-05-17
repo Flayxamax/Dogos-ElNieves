@@ -38,8 +38,12 @@ public class Producto implements Serializable {
     @Column(name = "categoria", nullable = false)
     @Enumerated(EnumType.STRING)
     private CategoriaProducto categoria;
+    
+    @Column(name="activo", nullable = false)
+    private boolean activo;
 
     public Producto() {
+        this.activo = true;
     }
 
     public Long getId() {
@@ -79,6 +83,14 @@ public class Producto implements Serializable {
 
     public void setCategoria(CategoriaProducto categoria) {
         this.categoria = categoria;
+    }
+    
+    public boolean getActivo(){
+        return activo;
+    }
+    
+    public void setActivo(boolean activo){
+        this.activo = activo;
     }
 
     @Override

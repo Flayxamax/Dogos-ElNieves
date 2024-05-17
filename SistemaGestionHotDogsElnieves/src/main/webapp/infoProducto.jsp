@@ -14,7 +14,7 @@
             <h1>Información del Producto</h1>
         </header>
 
-        <section class="infProducto">
+        <div class="infProducto">
             <div class="form">
                 <label for="categoria">Categoría:</label>
                 <select id="categoria" disabled></select>
@@ -31,6 +31,6 @@
                 <button id="botonCancelar" onclick="cancelarEdicion()" style="display:none;" >Cancelar</button>
                 <button id="botonRegresar" onclick="regresar()" style="display:none;">Regresar</button>
             </div>
-        </section>
+        </div>
     </body>
 </html>
